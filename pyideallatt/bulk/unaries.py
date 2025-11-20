@@ -45,7 +45,7 @@ class SimpleCubic(Bulk):
 
         a = kwargs.get('a')
         if a is None:
-            v = self.get_lattice_data(elem)
+            v = self.get_lattice_data(elem[0])
             a = SimpleCubic.find_a_from_volume(v)
         self.a_ = a
         self.b_ = a
@@ -80,7 +80,7 @@ class BodyCenteredCubic(Bulk):
 
         a = kwargs.get('a')
         if a is None:
-            v = self.get_lattice_data(elem)
+            v = self.get_lattice_data(elem[0])
             a = BodyCenteredCubic.find_a_from_volume(v)
         self.a_ = a
         self.b_ = a
@@ -116,7 +116,8 @@ class FaceCenteredCubic(Bulk):
 
         a = kwargs.get('a')
         if a is None:
-            a = 4 * covalent_radii[atomic_numbers[elem]] / np.sqrt(2) / 2
+            v = self.get_lattice_data(elem[0])
+            a = FaceCenteredCubic.find_a_from_volume(v)
         self.a_ = a
         self.b_ = a
         self.c_ = a
@@ -156,8 +157,8 @@ class Diamond(Bulk):
 
         a = kwargs.get('a')
         if a is None:
-            tmp = covalent_radii[atomic_numbers[elem]] * 2
-            a = calculate_equilateral_triangle_basedge(tmp, 109.4712)
+            v = self.get_lattice_data(elem[0])
+            a = Diamond.find_a_from_volume(v)
         self.a_ = a
         self.b_ = a
         self.c_ = a
@@ -186,7 +187,7 @@ class BetaTin(Bulk):
         a = kwargs.get('a')
         if a is None:
             a = calculate_equilateral_triangle_basedge(
-                a=2*covalent_radii[atomic_numbers[elem]], 
+                a=2*covalent_radii[atomic_numbers[elem[0]]], 
                 theta=94.0229)
         
         self.a_ = a
