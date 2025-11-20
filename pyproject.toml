@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools>=61", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pyideallatt"
+version = "1.0.0"
+description = "PyIdealLatt — A separate distribution of functionalities building up ideal lattice (mainly for benchmark context) implemented with Python"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "ase",
+    "pytest"
+]
+
+[project.urls]
+homepage = "https://github.com/kirk0830/PyIdealLatt"
