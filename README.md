@@ -90,32 +90,33 @@ structure.relax_cell_scale(calculator)
 
 ### Unary Structures
 
-| Structure Type | Class Name | Description |
+| Structure Type | Enum Name | Description |
 |----------------|------------|-------------|
-| Simple Cubic | `SimpleCubic` | Simple Cubic (SC) |
-| Body-Centered Cubic | `BodyCenteredCubic` | Body-Centered Cubic (BCC) |
-| Face-Centered Cubic | `FaceCenteredCubic` | Face-Centered Cubic (FCC) |
-| Diamond | `Diamond` | Diamond Structure |
-| β-Tin | `BetaTin` | β-Tin Structure |
+| Simple Cubic | `BulkUnaryType.SIMPLECUBIC` | Simple Cubic (SC) |
+| Body-Centered Cubic | `BulkUnaryType.BODYCENTEREDCUBIC` | Body-Centered Cubic (BCC) |
+| Face-Centered Cubic | `BulkUnaryType.FACECENTEREDCUBIC` | Face-Centered Cubic (FCC) |
+| Diamond | `BulkUnaryType.DIAMOND` | Diamond Structure |
+| β-Tin | `BulkUnaryType.BETATIN` | β-Tin Structure |
 
 ### Binary Compound Structures
 
-| Formula | Class Name | Description |
+| Formula | Enum Name | Description |
 |---------|------------|-------------|
-| XO | `IdealXO` | 1:1 compounds (e.g., NaCl-type) |
-| X₂O | `IdealX2O` | 2:1 compounds |
-| XO₂ | `IdealXO2` | 1:2 compounds (e.g., TiO₂-type) |
-| X₂O₃ | `IdealX2O3` | 2:3 compounds (e.g., Al₂O₃-type) |
-| X₂O₅ | `IdealX2O5` | 2:5 compounds |
+| X₂O | `BulkBinaryType.X2Y` | 2:1 compounds |
+| XO | `BulkBinaryType.XY` | 1:1 compounds (e.g., NaCl-type) |
+| X₂O₃ | `BulkBinaryType.X2O3` | 2:3 compounds (e.g., Al₂O₃-type) |
+| XO₂ | `BulkBinaryType.XY2` | 1:2 compounds (e.g., TiO₂-type) |
+| X₂O₅ | `BulkBinaryType.X2O5` | 2:5 compounds |
+| XO₃ | `BulkBinaryType.XY3` | 1:3 compounds |
+
+More lattice types to be added in the future.
 
 ## Minimal Dependencies
 
 PyIdealLatt is designed with a lightweight philosophy:
 
-- **Core Dependencies**: `numpy`, `ase`, `scipy`, `pyyaml`
+- **Core Dependencies**: `numpy`, `ase`, `scipy`
 - **Optional Dependencies**: None required for basic functionality
-- **Installation Size**: < 50MB total footprint
-- **Startup Time**: < 1 second for typical operations
 
 ## Use Cases
 
