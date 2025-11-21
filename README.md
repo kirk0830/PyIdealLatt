@@ -151,10 +151,10 @@ for i, struct in enumerate(structures):
 # Rapid structure generation for screening
 compounds = [('Ti', 'O'), ('Al', 'O'), ('Si', 'O')]
 
-for metal, oxygen in compounds:
-    for ratio in [IdealXO, IdealX2O, IdealXO2]:
+for xsite, ysite in compounds:
+    for bintyp in [BulkBinaryType.XY, BulkBinaryType.X2O, BulkBinaryType.XY2]::
         try:
-            structure = ratio(x=metal, y=oxygen)
+            structure = build(bintyp, x=xsite, y=ysite)
             print(f"Generated: {structure.name_}")
         except:
             continue
