@@ -167,8 +167,8 @@ class Diamond(Bulk):
         self.beta_  = 60
         self.gamma_ = 60
 
-        self.taud_ = np.array([[0.25, 0.25, 0.25], 
-                               [0.75, 0.75, 0.75]])
+        self.taud_ = np.array([[0.00, 0.00, 0.00], 
+                               [0.25, 0.25, 0.25]])
 
 class BetaTin(Bulk):
     '''beta-tin'''
