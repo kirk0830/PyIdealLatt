@@ -152,7 +152,7 @@ for i, struct in enumerate(structures):
 compounds = [('Ti', 'O'), ('Al', 'O'), ('Si', 'O')]
 
 for xsite, ysite in compounds:
-    for bintyp in [BulkBinaryType.XY, BulkBinaryType.X2O, BulkBinaryType.XY2]::
+    for bintyp in [BulkBinaryType.XY, BulkBinaryType.X2Y, BulkBinaryType.XY2]:
         try:
             structure = build(bintyp, x=xsite, y=ysite)
             print(f"Generated: {structure.name_}")
