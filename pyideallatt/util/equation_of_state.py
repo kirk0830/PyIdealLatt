@@ -109,7 +109,7 @@ def calculate(latt: BaseLatt,
         scaled.calc = calculator
         return scaled.get_volume(), scaled.get_potential_energy()
     
-    e, v = zip(*[f(eps**(1/3)) for eps in np.linspace(lo, hi, n)])
+    v, e = zip(*[f(eps**(1/3)) for eps in np.linspace(lo, hi, n)])
     
     imin = np.argmin(e) # for the initial guess of the e0 and v0
     popt, _ = curve_fit(birchmurnaghan, v, e, p0=(e[imin], 1, 1, v[imin]))
