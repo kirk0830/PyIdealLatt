@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from typing import Optional, List, Dict
+from typing import List, Dict
 
 from ase import Atoms
 from ase.optimize import BFGS
@@ -38,6 +38,13 @@ class BaseLatt(ABC):
             'taud': self.taud_
         }
 
+    @classmethod
+    def fromdict(cls, mydict: Dict) -> 'BaseLatt':
+        return cls(**mydict)
+
+    def copy(self) -> 'BaseLatt':
+        return self.fromdict(self.todict())
+
     def __repr__(self) -> str:
         mydict = self.todict()
         mydict['elem'] = ''.join(mydict['elem'])
@@ -48,30 +55,22 @@ class BaseLatt(ABC):
         return self.__repr__()
 
     def valid(self) -> bool:
-        '''
-        check if the structure is valid
-        '''
+        ''' check if the structure is valid '''
         return all(x is not None for x in self.todict().values())
 
     def cellpar(self) -> List[float]:
-        '''
-        get the cell parameters
-        '''
+        ''' get the cell parameters '''
         return [self.a_, self.b_, self.c_, self.alpha_, self.beta_, self.gamma_]
 
     def toase(self) -> Atoms:
-        '''
-        export structures to the ase.atoms.Atoms
-        '''
+        ''' export structures to the ase.atoms.Atoms '''
         return Atoms(symbols=self.elem_,
                      scaled_positions=self.taud_,
                      cell=cellpar_to_cell(self.cellpar()))
     
     @classmethod
     def fromase(cls, atoms: Atoms, **kwargs) -> 'BaseLatt':
-        '''
-        import structures from the ase.atoms.Atoms
-        '''
+        ''' import structures from the ase.atoms.Atoms '''
         cellpar = atoms.cell.cellpar()
         elem = atoms.get_chemical_symbols()
         taud = atoms.get_scaled_positions()
@@ -163,3 +162,25 @@ class BaseLatt(ABC):
         '''
         raise NotImplementedError
     
+    @abstractmethod
+    def scale(self, eps, bycopy=False):
+        '''
+        scale the lattice vectors with the same ratio. Because the `scale`
+        behaves differently for different structures (especially for 
+        different dimensions), this method is not implemented here.
+
+        Parameters
+        ----------
+        eps
+            the ratio of scaling.
+        bycopy
+            if True, return a new structure, otherwise, modify the current
+            structure.
+        
+        Returns
+        -------
+        None | BaseLatt
+            if `bycopy` is True, return a new structure, otherwise, return
+            None, the current structure is modified.
+        '''
+        raise NotImplementedError
