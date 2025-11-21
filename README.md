@@ -48,22 +48,22 @@ print(diamond)
 ### Binary Compound Structures
 
 ```python
-from pyideallatt.bulk.binaries import IdealX2O, IdealXO, IdealXO2
+from pyideallatt.bulk.binaries import build, BulkBinaryType
 
 # Generate X₂O structure (e.g., Ca₂O)
-calcium_oxide = IdealX2O(x='Ca')
+calcium_oxide = build(BulkBinaryType.X2Y, x='Ca')
 print(calcium_oxide)
 
 # Generate XO structure (e.g., MgO)
-magnesium_oxide = IdealXO(x='Mg')
+magnesium_oxide = build(BulkBinaryType.XY, x='Mg')
 print(magnesium_oxide)
 
 # Generate XO₂ structure (e.g., SiO₂)
-silicon_dioxide = IdealXO2(x='Si')
+silicon_dioxide = build(BulkBinaryType.XY2, x='Si')
 print(silicon_dioxide)
 
 # Support for different anions
-titanium_nitride = IdealXN(x='Ti', y='N')
+titanium_nitride = build(BulkBinaryType.XY, x='Ti', y='N')
 print(titanium_nitride)
 ```
 
@@ -122,6 +122,14 @@ PyIdealLatt is designed with a lightweight philosophy:
 ### Machine Learning Training Data
 ```python
 # Generate training dataset
+from ase.io import write
+from ase.calculators.cp2k import CP2K
+
+# the calculator you want to use to make labels
+calculator = CP2K(
+    # your CP2K input parameters
+)
+
 elements = ['Cu', 'Ag', 'Au', 'Al', 'Fe', 'Ni']
 structures = []
 
@@ -132,7 +140,10 @@ for elem in elements:
 
 # Export for ML training
 for i, struct in enumerate(structures):
-    struct.to_file(f'training_data/struct_{i}.cif')
+    s = struct.toase()
+    s.calc = calculator
+    s.get_potential_energy()
+    write(f'training_data/struct_{i}.extxyz', struct.toase())
 ```
 
 ### High-Throughput Screening
