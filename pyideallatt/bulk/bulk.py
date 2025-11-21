@@ -140,3 +140,27 @@ class Bulk(BaseLatt):
         self.a_ *= (1 + eps)
         self.b_ *= (1 + eps)
         self.c_ *= (1 + eps)
+
+    def scale(self, eps: float, bycopy: bool = False):
+        '''
+        scale the lattice vectors with the same ratio.
+
+        Parameters
+        ----------
+        eps
+            the ratio of scaling.
+        bycopy
+            if True, return a new structure, otherwise, modify the current
+            structure.
+
+        Returns
+        -------
+        None | BaseLatt
+            if `bycopy` is True, return a new structure, otherwise, return
+            None, the current structure is modified.
+        '''
+        toscale = self if not bycopy else self.copy()
+        toscale.a_ *= eps
+        toscale.b_ *= eps
+        toscale.c_ *= eps
+        return toscale if bycopy else None
