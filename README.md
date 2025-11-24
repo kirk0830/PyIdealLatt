@@ -18,7 +18,7 @@ PyIdealLatt is a lightweight Python package for generating ideal crystal structu
 ## Installation
 
 ```bash
-pip install pyideallatt
+pip install git+https://github.com/kirk0830/PyIdealLatt.git
 ```
 
 ## Quick Start
@@ -160,6 +160,9 @@ for xsite, ysite in compounds:
         except:
             continue
 ```
+
+### Precision benchmarking based on EOS
+see [examples/delta_test.py](examples/delta_test.py)
 
 ## Contributing
 
