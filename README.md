@@ -162,7 +162,7 @@ for xsite, ysite in compounds:
 ```
 
 ### Precision benchmarking based on EOS
-see [examples/dalta_test.py](examples/dalta_test.py)
+see [examples/delta_test.py](examples/delta_test.py)
 
 ## Contributing
 
