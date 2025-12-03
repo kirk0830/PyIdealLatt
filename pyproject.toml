@@ -13,5 +13,8 @@ dependencies = [
     "pytest"
 ]
 
+[tool.setuptools.package-data]
+pyideallatt = ["**/data/*.yaml", "**/data/*.yml"]
+
 [project.urls]
 homepage = "https://github.com/kirk0830/PyIdealLatt"
